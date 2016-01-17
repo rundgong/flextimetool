@@ -1,0 +1,12 @@
+
+# use glob syntax.
+syntax: glob
+
+.hgignore
+*.o
+*~
+XFlexTimeTool
+FlexTimeTool
+simulation
+*.orig
+*.flexlog

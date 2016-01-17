@@ -1,0 +1,88 @@
+FlexTimeTool by Markus Eriksson
+
+Track your working time by sensing your presence at the computer.
+It logs all activity to easily readable text files and calculates your +/-
+flex time balance.
+
+FlexTimeTool comes in two versions. The main version (XFlexTimeTool) uses the
+X11 screensaver libs to monitor activity and the "old" version (FlexTimeTool)
+uses /dev/input events to sense mouse or keyboard usage.
+By default events are read from /dev/input/event0 but that can be changed in 
+the configuration file.
+
+Reading events from /dev/input/event0 may need root privileges, depending on
+how your system is setup.
+
+
+How does it work?
+  It remembers the first and last time you are active in the day and then 
+  subtracts a predefined amount of lunch time. Your work day is by default 8
+  hours and your lunch break 40 minutes, but this can be customized.
+  A lunch break is only subtracted if you work more than 5 hours.
+  
+  When it is started it will read back the previously stored data and continue
+  counting from that. Since all logs are stored in easy to edit human readable
+  form it is easy to change the logs and add working time if you work out of
+  office for a day so it did not register, or you want to add an hour that you
+  worked from home in the morning before you came in to the office.
+  
+  Note that you can not edit the logs while it is running since the program 
+  will overwrite your changes. You need to kill the program first to make sure
+  your edits will not conflict with what the program is writing.
+  
+  If there is no registered activity at all on a normal working day it does NOT
+  subtract any flex time. If you want to subtract a whole day see below in the
+  section called "Log files"
+
+  
+Building:
+- Dependencies:
+  XFlexTimeTool depends on these libraries.
+  * X11 (libx11-dev on Ubuntu), 
+  * libxscrnsaver (libxss-dev)
+
+- To build, just run "make" to build all targets 
+  or the individual targets "make x", "make devinput", "make simulation" 
+  depending on what you want to build.
+
+
+Installation:
+  FlexTimeTool requires no installation but you may want to copy it to your 
+  bin path.
+  FlexTimeTool needs a working directory to store its data files. By default
+  it uses $HOME/.flextimetool but you can override this with a switch at run
+  time. If the working directory does not exist it will be created.
+
+  
+Configuring:
+  FlexTimeTool reads config parameters from a file named flextimetool.conf 
+  in the working directory if it exists. See flextimetool.conf.template for
+  more info.
+
+
+Running:
+  Just fire it up in your favorite console, and leave it there. It will update
+  the current flex balance on the screen in real time.
+
+
+Log files:
+  Log files are put in the working directory, one for each month.
+  The file names are YYYY-MM.flexlog, where YYYY=Year and MM=Month.
+  
+  Each day is log on a separate line with the following format
+  Date: start.time-end.time; target.working.time; lunch.time; daily.flex#comment
+  After the hash(#) you can add a comment or note to the end of the line.
+  Below is an example log file:
+---------------------------------------
+previous flex: 5.32
+25: 08.00-17.00; 8.00; 0.40; +0.20#
+26: 08.12-15.20; 8.00; 0.40; -1.32# Left early to go to the dentist
+27: 08.15-17.19; 8.00; 0.40; +0.24#
+total flex: 4.44
+---------------------------------------
+  
+  Q: How do I subtract a whole day?
+  A: You manually add a day with 0 worked minutes as follows
+     28: 08.15-08.15; 8.00; 0.40; -8.00#
+     
+     

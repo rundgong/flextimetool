@@ -1,0 +1,23 @@
+# FlexTimeTool configuration file
+
+# Remove '#' to uncomment a line and make changes active.
+# Time format:   40 = 40 minutes
+#              8.00 = 8 hours and zero minutes
+
+#Monday: 8.00
+#Tuesday: 8.00
+#Wednesday: 8.00
+#Thursday: 8.00
+#Friday: 8.00
+#Saturday: 0.00
+#Sunday: 0.00
+
+#Monday Lunch: 40
+#Tuesday Lunch: 40
+#Wednesday Lunch: 40
+#Thursday Lunch: 40
+#Friday Lunch: 40
+#Saturday Lunch: 0
+#Sunday Lunch: 0
+
+#Input Event Path: /dev/input/event0
