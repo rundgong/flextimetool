@@ -311,8 +311,7 @@ FlexTimeTracker::Day::toString() const
     while( it != m_workHours.end() )
     {
         time = *localtime( &(it->first) );
-        std::ostringstream oss;
-        oss << ", " << time.tm_hour << "." << time.tm_min << "-";
+        oss << ", " << zeroPad(time.tm_hour) << "." << zeroPad(time.tm_min) << "-";
         time = *localtime( &(it->second) );
         oss << zeroPad(time.tm_hour) << "." << zeroPad(time.tm_min);
         it++;
