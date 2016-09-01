@@ -73,8 +73,10 @@ minuteParse( const std::string str )
     }
     
     mins = strtol(tmpStr.c_str(),0,10);
+    int sign = 1;
+    if(hrs<0){ sign = -1; } // if hour part has a '-' in front, minutes also need to be negative
     
-    return 60*hrs+mins;
+    return 60*hrs+sign*mins;
 }
 
 
